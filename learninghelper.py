@@ -30,7 +30,14 @@ class learningHelper():
         #headname=['todo','date','haveDone']
         df = pd.read_csv(cls.file_name,'\t+', engine='python',header=0) 
         ndf = df.sort_values(ascending=True,by=["date"],inplace=False,axis=0)
+        
         ndf.to_csv(cls.file_name,sep='\t',index=False) 
+    
+    #列表中删除
+    @classmethod
+    def remove_thing(cls,thing):#遍历每一行，有done字符串的，就删除，并且把已完成的放到done.txt中
+        pass 
+
 
 if __name__=="__main__":
 
@@ -42,4 +49,6 @@ if __name__=="__main__":
             learningHelper.sort_todolist()
     else: 
         learningHelper.sort_todolist()
+        #显示当前日期要做的事情
+
 
