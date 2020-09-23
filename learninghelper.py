@@ -9,6 +9,12 @@ class learningHelper():
 
     file_name = str("todolist.txt")
     standardtimeformat = r"%Y-%m-%d %H:%M:%S"
+    dayformat = r"%Y-%m-%d"
+
+    #如果不存在符合格式的todolist，则自动生成
+    @classmethod
+    def init(cls):
+        pass
 
     @classmethod
     def generateTodolist(cls, todostr):
@@ -24,20 +30,22 @@ class learningHelper():
         resstr = resstr+'\n'+todostr+"\t\t"+(datetime.datetime.now()+datetime.timedelta(days=90)).strftime(learningHelper.standardtimeformat)+"\t\t"+"notdone"      
         return resstr
 
-
     @classmethod
     def sort_todolist(cls):
         #headname=['todo','date','haveDone']
         df = pd.read_csv(cls.file_name,'\t+', engine='python',header=0) 
         ndf = df.sort_values(ascending=True,by=["date"],inplace=False,axis=0)
-        
-        ndf.to_csv(cls.file_name,sep='\t',index=False) 
+
+        td = datetime.datetime.now().strftime(cls.dayformat)
+        print(ndf[ndf['date'].str.contains(td)]) #input today's thing
+        ndf.to_csv(cls.file_name,sep='\t',index=False)
     
     #列表中删除
     @classmethod
     def remove_thing(cls,thing):#遍历每一行，有done字符串的，就删除，并且把已完成的放到done.txt中
         pass 
-
+    #重复输入怎么办
+    #
 
 if __name__=="__main__":
 
